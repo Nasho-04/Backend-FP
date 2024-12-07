@@ -4,7 +4,9 @@ import { verifyApikeyMiddleware, verifyTokenMiddleware } from '../middlewares/au
 
 const productRouter = express.Router()
 
-productRouter.get('/', getProductsController)
+productRouter.get('/', (req, res) => res.send('Hello World Product!'))
+
+/* productRouter.get('/', getProductsController) */
 
 productRouter.get('/:product_id', getProductByIdController)
 
