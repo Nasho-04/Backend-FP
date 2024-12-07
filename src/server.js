@@ -13,6 +13,7 @@ app.use(cors())
 
 app.use('/api/auth', authRouter)
 app.use('/api/products', productRouter)
+app.use('/', (req, res) => res.send('Hello World!'))
 
 app.listen(ENVIRONMENT.PORT, () => {
     console.dir('Connected to the port number: ' + ENVIRONMENT.PORT)
