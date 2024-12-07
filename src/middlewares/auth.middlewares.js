@@ -1,5 +1,5 @@
 import ENVIRONMENT from "../config/environment.js";
-import ResponseBuilder from "../utils/ResponseBuilder.js";
+import ResponseBuilder from "../utils/Response.Builder.js";
 import jwt from 'jsonwebtoken'
 
 export const verifyApikeyMiddleware = (req, res, next) => {

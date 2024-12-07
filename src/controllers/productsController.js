@@ -1,4 +1,4 @@
-import ResponseBuilder from "../utils/ResponseBuilder.js";
+import ResponseBuilder from "../utils/Response.Builder.js";
 import ENVIRONMENT from "../config/environment.js";
 import ProductRepository from "../repositories/productRepository.js";
 

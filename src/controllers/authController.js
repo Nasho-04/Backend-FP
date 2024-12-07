@@ -1,4 +1,4 @@
-import ResponseBuilder from "../utils/ResponseBuilder.js";
+import ResponseBuilder from "../utils/Response.Builder.js";
 import UserRepository from "../repositories/userRepository.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
