@@ -212,7 +212,7 @@ export const forgotPasswordController = async (req, res) => {
             return res.json(response)
         }
         const resetToken = jwt.sign({email}, ENVIRONMENT.JWT_SIGN, {expiresIn: '1d'})
-        const resetURL = `http://localhost:5173/reset-password/${resetToken}`
+        const resetURL = `https://frontend-fp-two.vercel.app/reset-password/${resetToken}`
 
         await sendMail({
             to: email,
