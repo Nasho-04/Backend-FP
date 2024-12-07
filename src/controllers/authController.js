@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import sendMail from "../utils/mail.util.js";
 import ENVIRONMENT from "../config/environment.js";
-import User from "../models/user.models.js";
+import User from "../models/user.models.js"; 
 
 export const registerUserController = async (req, res) => {
     try {
