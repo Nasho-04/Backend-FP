@@ -4,6 +4,7 @@ import { verifyApikeyMiddleware } from '../middlewares/auth.middlewares.js'
 
 const authRouter = express.Router()
 
+authRouter.get('/', (req, res) => res.send('Hello World Register!'))
 authRouter.post('/register', registerUserController)
 
 authRouter.get('/verify/:verification_token', verifyMailValidationTokenController)
