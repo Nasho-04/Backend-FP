@@ -1,7 +1,7 @@
 import express from 'express'
 import ENVIRONMENT from './config/environment.js'
 import authRouter from './rutas/auth.router.js'
-import productRouter from './rutas/product.router.js'
+import productRouter from './rutas/product.router.js' 
 import mongoose from './db/config.js'
 import cors from 'cors'
 
