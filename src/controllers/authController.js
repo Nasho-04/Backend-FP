@@ -25,7 +25,7 @@ export const registerUserController = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10)
         const verificationToken = jwt.sign({email}, ENVIRONMENT.JWT_SIGN, {expiresIn: '1d'})
-        const URL_VERIFICATION = `http://localhost:${ENVIRONMENT.PORT}/api/auth/verify/${verificationToken}`
+        const URL_VERIFICATION = `https://backend-fp.vercel.app/api/auth/verify/${verificationToken}`
 
         
         const newUser = new User({name, email, password: hashedPassword, emailVerified: false, verificationToken})
