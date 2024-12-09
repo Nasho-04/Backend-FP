@@ -23,6 +23,42 @@ export const registerUserController = async (req, res) => {
             return res.json(response)
         }
 
+        if (!name || !email || !password) {
+            const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(400)
+            .setMessage('All fields are required')
+            .setPayload({
+                detail: 'All fields are required'
+            })
+            .build()
+            return res.json(response)
+        }
+
+        if (password.length < 5) {
+            const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(400)
+            .setMessage('Password must be at least 5 characters')
+            .setPayload({
+                detail: 'Password must be at least 5 characters'
+            })
+            .build()
+            return res.json(response)
+        }
+
+        if (!email.includes('@')) {
+            const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(400)
+            .setMessage('Invalid email')
+            .setPayload({
+                detail: 'Invalid email'
+            })
+            .build()
+            return res.json(response)
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10)
         const verificationToken = jwt.sign({email}, ENVIRONMENT.JWT_SIGN, {expiresIn: '1d'})
         const URL_VERIFICATION = `https://backend-fp.vercel.app/api/auth/verify/${verificationToken}`
@@ -308,13 +344,13 @@ export const resetTokenController = async (req, res) => {
             return res.json(response)
         }
 
-        if (password.length < 6) {
+        if (password.length < 5) {
             const response = new ResponseBuilder()
             .setOk(false)
             .setStatus(400)
-            .setMessage('Password must be at least 6 characters long')
+            .setMessage('Password must be at least 5 characters long')
             .setPayload({
-                detail: 'Password must be at least 6 characters long'
+                detail: 'Password must be at least 5 characters long'
             })
             .build()
             return res.json(response)

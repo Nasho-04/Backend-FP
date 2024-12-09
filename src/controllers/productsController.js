@@ -151,13 +151,37 @@ export const createProductController = async (req, res) => {
         return res.json(response)
     }
 
-    if (!product.description || !isNaN(product.description) || product.description.length < 15) {
+    if (product.name.length < 3) {
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(400)
+            .setMessage('Product name must be at least 3 characters long')
+            .setPayload({
+                detail: 'Product name must be at least 3 characters long'
+            })
+            .build()
+        return res.json(response)
+    }
+
+    if (!product.description || !isNaN(product.description)) {
         const response = new ResponseBuilder()
             .setOk(false)
             .setStatus(400)
             .setMessage('Product description is required and must be valid')
             .setPayload({
-                detail: 'Product description is required, must not be a number and must be at least 15 characters long'
+                detail: 'Product description is required and must not be a number'
+            })
+            .build()
+        return res.json(response)
+    }
+
+    if (product.description.length < 15) {
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(400)
+            .setMessage('Product description must be at least 15 characters long')
+            .setPayload({
+                detail: 'Product description must be at least 15 characters long'
             })
             .build()
         return res.json(response)
@@ -169,7 +193,7 @@ export const createProductController = async (req, res) => {
             .setStatus(400)
             .setMessage('Product price is required and must be valid')
             .setPayload({
-                detail: 'Product price is required, must be a number and must be greater than 0'
+                detail: 'Product price must be a number greater than 0'
             })
             .build()
         return res.json(response)
@@ -193,7 +217,7 @@ export const createProductController = async (req, res) => {
             .setStatus(400)
             .setMessage('Product stock is required and must be valid')
             .setPayload({
-                detail: 'Product stock is required, must be a number and must be greater than 0'
+                detail: 'Product stock must be a number greater than 0'
             })
             .build()
         return res.json(response)
@@ -284,7 +308,7 @@ export const updateProductController = async (req, res) => {
         return res.json(response)
     }
     
-    if (!product.name || !isNaN(product.name) || product.name.length < 3) {
+    if (!product.name || !isNaN(product.name)) {
         const response = new ResponseBuilder()
             .setOk(false)
             .setStatus(400)
@@ -296,17 +320,42 @@ export const updateProductController = async (req, res) => {
         return res.json(response)
     }
 
-    if (!product.description || !isNaN(product.description) || product.description.length < 15) {
+    if (product.name.length < 3) {
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(400)
+            .setMessage('Product name must be at least 3 characters long')
+            .setPayload({
+                detail: 'Product name must be at least 3 characters long'
+            })
+            .build()
+        return res.json(response)
+    }
+
+    if (!product.description || !isNaN(product.description)) {
         const response = new ResponseBuilder()
             .setOk(false)
             .setStatus(400)
             .setMessage('Product description is required and must be valid')
             .setPayload({
-                detail: 'Product description is required, must not be a number and must be at least 15 characters long'
+                detail: 'Product description is required and must not be a number'
             })
             .build()
         return res.json(response)
     }
+
+    if (product.description.length < 15) {
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(400)
+            .setMessage('Product description must be at least 15 characters long')
+            .setPayload({
+                detail: 'Product description must be at least 15 characters long'
+            })
+            .build()
+        return res.json(response)
+    }
+
 
     if (!product.price || isNaN(product.price) || product.price < 0) {
         const response = new ResponseBuilder()
@@ -314,7 +363,7 @@ export const updateProductController = async (req, res) => {
             .setStatus(400)
             .setMessage('Product price is required and must be valid')
             .setPayload({
-                detail: 'Product price is required, must be a number and must be greater than 0'
+                detail: 'Product price must be a number greater than 0'
             })
             .build()
         return res.json(response)
@@ -338,7 +387,7 @@ export const updateProductController = async (req, res) => {
             .setStatus(400)
             .setMessage('Product stock is required and must be valid')
             .setPayload({
-                detail: 'Product stock is required, must be a number and must be greater than 0'
+                detail: 'Product stock must be a number greater than 0'
             })
             .build()
         return res.json(response)
