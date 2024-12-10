@@ -138,7 +138,7 @@ export const verifyMailValidationTokenController = async (req, res) => {
             detail: 'Email verified successfully'
         })
         .build()
-        return res.render('main', response)
+        return res.json(response)
     } catch (error) {
         const response = new ResponseBuilder()
         .setOk(false)
