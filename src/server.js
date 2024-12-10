@@ -4,8 +4,12 @@ import authRouter from './rutas/auth.router.js'
 import productRouter from './rutas/product.router.js' 
 import mongoose from './db/config.js'
 import cors from 'cors'
+import handlebars from 'express-handlebars'
 
 const app = express()
+app.engine('handlebars', handlebars.engine())
+app.set('views', './src/views')
+app.set('view engine', 'handlebars')
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
