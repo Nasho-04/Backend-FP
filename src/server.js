@@ -7,13 +7,13 @@ import cors from 'cors'
 import handlebars from 'express-handlebars'
 
 const app = express()
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(cors())
 app.engine('handlebars', handlebars.engine())
 app.set('views', './src/views')
 app.set('view engine', 'handlebars')
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-app.use(cors())
 
 app.use('/api/auth', authRouter)
 app.use('/api/products', productRouter)
