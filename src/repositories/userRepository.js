@@ -6,6 +6,11 @@ class UserRepository {
         return user
     }
 
+    static async getById(id) {
+        const user = await User.findById(id)
+        return user
+    }
+
     static async saveUser(user) {
         return await user.save()
     }
