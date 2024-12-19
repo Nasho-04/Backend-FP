@@ -2,6 +2,7 @@ import ResponseBuilder from "../utils/Response.Builder.js";
 import ENVIRONMENT from "../config/environment.js";
 import ProductRepository from "../repositories/productRepository.js";
 import UserRepository from "../repositories/userRepository.js";
+import CartRepository from "../repositories/cartRepository.js";
 
 // TERMINAR EL UPDATE
 export const getProductsController = async (req, res) => {
@@ -502,7 +503,7 @@ export const deleteProductController = async (req, res) => {
 export const getCartController = async (req, res) => {
     try {
     const user_id = req.user.id
-    const cart = await ProductRepository.getCart(user_id)
+    const cart = await CartRepository.getCart(user_id)
 
     if (!cart) {
         const response = new ResponseBuilder()
@@ -576,8 +577,20 @@ export const addToCartController = async (req, res) => {
             })
             .build()
         return res.json(response)
-    } 
-    await ProductRepository.addToCart(user_id, product_id)
+    }
+    const cart = await CartRepository.getCart(user_id)
+    if (!cart) {
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(404)
+            .setMessage('Cart not found')
+            .setPayload({
+                detail: 'Cart not found'
+            })
+            .build()
+        return res.json(response)
+    }
+    await CartRepository.addToCart(user_id, product_id)
     const response = new ResponseBuilder()
         .setOk(true)
         .setStatus(200)
