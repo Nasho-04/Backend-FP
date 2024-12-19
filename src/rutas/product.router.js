@@ -14,8 +14,4 @@ productRouter.put('/edit/:product_id', verifyTokenMiddleware([]), updateProductC
 
 productRouter.delete('/:product_id', verifyTokenMiddleware([]), deleteProductController)
 
-productRouter.get('/cart', getCartController)
-
-productRouter.post('/cart/:product_id', addToCartController)
-
 export default productRouter
