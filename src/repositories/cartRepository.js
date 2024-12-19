@@ -1,21 +1,21 @@
-import Cart from "../models/cart.models.js";
+import CartObject from "../models/cart.models.js";
 
-class CartRepository {
-
-    static async createCart(user_id) {
-        return await Cart.create({ user_id: user_id, cart: [] })
-    }
+class CartObjectRepository {
     static async getCart(user_id) {
-        return await Cart.findOne({ user_id: user_id })
+        return await CartObject.findAll({ user_id: user_id })
     }
 
     static async addToCart(user_id, product_id) {
-        return await Cart.findOneAndUpdate({ user_id: user_id }, { $push: { cart: product_id } }, { new: true })
+        return await CartObject.create({ user_id: user_id, product_id: product_id })
     }
 
-    static async removeFromCart(user_id, product_id) {
-        return await Cart.findOneAndUpdate({ user_id: user_id }, { $pull: { cart: product_id } }, { new: true })
+    static async createCart(user_id) {
+        return await CartObject.create({ user_id: user_id })
+    }
+
+    static async deleteCart(user_id) {
+        return await CartObject.findOneAndDelete({ user_id: user_id, product_id: product_id })
     }
 }
 
-export default CartRepository
+export default CartObjectRepository
