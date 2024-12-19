@@ -68,7 +68,6 @@ export const registerUserController = async (req, res) => {
         
         const newUser = new User({name, email, password: hashedPassword, emailVerified: false, verificationToken})
         await UserRepository.saveUser(newUser)
-        await CartObjectRepository.createCart(newUser.id)
         await sendMail({
             to: email,
             subject: 'Verify your email',
