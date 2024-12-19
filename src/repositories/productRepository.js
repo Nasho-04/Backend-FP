@@ -20,10 +20,6 @@ class ProductRepository {
     static async deleteProduct(id) {
         return await Product.findByIdAndDelete(id)
     }
-
-    static async addToCart(user_id, product_id) {
-        return await Product.findOneAndUpdate({ user_id: user_id }, { $push: { cart: product_id } }, { new: true })
-    }
 }
 
 export default ProductRepository
