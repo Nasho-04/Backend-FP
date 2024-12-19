@@ -1,8 +1,6 @@
 import ResponseBuilder from "../utils/Response.Builder.js";
 import ENVIRONMENT from "../config/environment.js";
 import ProductRepository from "../repositories/productRepository.js";
-import UserRepository from "../repositories/userRepository.js";
-import CartObjectRepository from "../repositories/cartRepository.js";
 
 // TERMINAR EL UPDATE
 export const getProductsController = async (req, res) => {
