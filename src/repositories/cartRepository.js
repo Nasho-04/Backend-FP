@@ -1,8 +1,8 @@
 import CartObject from "../models/cart.models.js";
 
 class CartObjectRepository {
-    static async getCart(user_id) {
-        return await CartObject.find({ user_id: user_id })
+    static async getCart() {
+        return await CartObject.find()
     }
 
     static async addToCart(user_id, product_id) {
