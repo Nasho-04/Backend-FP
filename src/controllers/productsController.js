@@ -506,15 +506,7 @@ export const getCartController = async (req, res) => {
     const cart = await CartRepository.getCart(user_id)
 
     if (!cart) {
-        const response = new ResponseBuilder()
-            .setOk(false)
-            .setStatus(404)
-            .setMessage('Cart not found')
-            .setPayload({
-                detail: 'Cart not found'
-            })
-            .build()
-        return res.json(response)
+        await CartRepository.createCart(user_id)
     }
 
     const response = new ResponseBuilder()

@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken'
 import sendMail from "../utils/mail.util.js";
 import ENVIRONMENT from "../config/environment.js";
 import User from "../models/user.models.js"; 
+import Cart from "../models/cart.models.js";
+import CartRepository from "../repositories/cartRepository.js";
 
 export const registerUserController = async (req, res) => {
     try {
@@ -66,7 +68,7 @@ export const registerUserController = async (req, res) => {
         
         const newUser = new User({name, email, password: hashedPassword, emailVerified: false, verificationToken})
         await UserRepository.saveUser(newUser)
-
+        await CartRepository.createCart(newUser.id)
         await sendMail({
             to: email,
             subject: 'Verify your email',
@@ -130,6 +132,7 @@ export const verifyMailValidationTokenController = async (req, res) => {
             return res.json(response)
         }
         UserRepository.verifyEmail(user)
+
         const response = new ResponseBuilder()
         .setOk(true)
         .setStatus(200)
