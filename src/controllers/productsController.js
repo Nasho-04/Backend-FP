@@ -503,10 +503,18 @@ export const deleteProductController = async (req, res) => {
 export const getCartController = async (req, res) => {
     try {
     const user_id = req.user.id
-    const cart = await CartRepository.getCart(user_id)
+    const cart = await CartObjectRepository.getCart(user_id)
 
     if (!cart) {
-        await CartRepository.createCart(user_id)
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(404)
+            .setMessage('Cart not found')
+            .setPayload({
+                detail: 'Cart not found'
+            })
+            .build()
+        return res.json(response)
     }
 
     const response = new ResponseBuilder()
@@ -570,7 +578,7 @@ export const addToCartController = async (req, res) => {
             .build()
         return res.json(response)
     }
-    const cart = await CartRepository.getCart(user_id)
+    const cart = await CartObjectRepository.getCart(user_id)
     if (!cart) {
         const response = new ResponseBuilder()
             .setOk(false)
@@ -582,7 +590,7 @@ export const addToCartController = async (req, res) => {
             .build()
         return res.json(response)
     }
-    await CartRepository.addToCart(user_id, product_id)
+    await CartObjectRepository.addToCart(user_id, product_id)
     const response = new ResponseBuilder()
         .setOk(true)
         .setStatus(200)

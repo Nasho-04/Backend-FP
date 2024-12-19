@@ -13,7 +13,7 @@ class CartObjectRepository {
         return await CartObject.create({ user_id: user_id })
     }
 
-    static async deleteCart(user_id) {
+    static async deleteCart(user_id, product_id) {
         return await CartObject.findOneAndDelete({ user_id: user_id, product_id: product_id })
     }
 }
