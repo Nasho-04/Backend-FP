@@ -502,8 +502,7 @@ export const deleteProductController = async (req, res) => {
 
 export const getCartController = async (req, res) => {
     try {
-    const user_id = req.user.id
-    const cart = await CartObjectRepository.getCart(user_id)
+    const cart = await CartObjectRepository.getCart()
 
     if (!cart) {
         const response = new ResponseBuilder()
