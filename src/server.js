@@ -6,14 +6,18 @@ import mongoose from './db/config.js'
 import cors from 'cors'
 import cartRouter from './rutas/cart.router.js'
 
+const corsOptions = {
+    origin: ['http://localhost:5173', 'https://frontend-fp-two.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key'],
+    credentials: true,
+    optionsSuccessStatus: 200
+}
+
 const app = express()
+app.use(cors(corsOptions))
 app.use(express.json({limit: '50mb'}))
 app.use(express.urlencoded({extended: true, limit: '50mb'}))
-app.use(cors(
-    {
-        AccessControlAllowOrigin: '*'
-    }
-))
 
 
 app.use('/api/auth', authRouter)
