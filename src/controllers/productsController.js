@@ -102,7 +102,7 @@ export const getProductByIdController = async (req, res) => {
         const response = new ResponseBuilder()
             .setOk(false)
             .setStatus(500)
-            .setMessage('Error getting product')
+            .setMessage('Error getting product by id')
             .setPayload({
                 detail: error.message
             })
