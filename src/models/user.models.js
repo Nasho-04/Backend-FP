@@ -8,7 +8,6 @@ const userSchema = mongoose.Schema(
         emailVerified: {type: Boolean, required: true},
         verificationToken: {type: String, required: true},
         role: {type: String, required: true, default: 'user'},
-        cart: {type: Array, required: true, default: []}
     }
 )
 
