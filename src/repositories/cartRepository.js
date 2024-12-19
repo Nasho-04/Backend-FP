@@ -3,7 +3,7 @@ import Cart from "../models/cart.models.js";
 class CartRepository {
 
     static async createCart(user_id) {
-        return await Cart.save({ user_id: user_id, cart: [] })
+        return await Cart.create({ user_id: user_id, cart: [] })
     }
     static async getCart(user_id) {
         return await Cart.findOne({ user_id: user_id })
