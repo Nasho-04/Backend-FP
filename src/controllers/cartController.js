@@ -115,3 +115,77 @@ export const addToCartController = async (req, res) => {
         return res.json(response)
     }
 }
+
+export const removeFromCartController = async (req, res) => {
+    try {
+    const { product_id } = req.params
+    if (!product_id) {
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(400)
+            .setMessage('Product id is required')
+            .setPayload({
+                detail: 'Product id is required'
+            })
+            .build()
+        return res.json(response)
+    }
+    const user_id = req.user.id
+    const user = await UserRepository.getById(user_id)
+    if (!user) {
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(404)
+            .setMessage('User not found')
+            .setPayload({
+                detail: 'User not found'
+            })
+            .build()
+        return res.json(response)
+    }
+    const product = await ProductRepository.getProductById(product_id)
+    if (!product) {
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(404)
+            .setMessage('Product not found')
+            .setPayload({
+                detail: 'Product not found'
+            })
+            .build()
+        return res.json(response)
+    }
+    const cart = await CartObjectRepository.getCart(user_id)
+    if (!cart) {
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(404)
+            .setMessage('Cart not found')
+            .setPayload({
+                detail: 'Cart not found'
+            })
+            .build()
+        return res.json(response)
+    }
+    await CartObjectRepository.removeFromCart(user_id, product_id)
+    const response = new ResponseBuilder()
+        .setOk(true)
+        .setStatus(200)
+        .setMessage('Product removed from cart successfully')
+        .setPayload({
+            detail: 'Product removed from cart successfully'
+        })
+        .build()
+    return res.json(response)
+    } catch (error) {    
+        const response = new ResponseBuilder()
+            .setOk(false)
+            .setStatus(500)
+            .setMessage('Error removing product from cart')
+            .setPayload({
+                detail: error.message
+            })
+            .build()
+        return res.json(response)
+    }
+}
